@@ -2,24 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Welcome to My Site</title>
+  <title>Jobbee - Find Your Dream Job</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-      background: #f4f4f4;
-    }
-    h1 {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fc;
       color: #333;
     }
-    p {
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #276ef1;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .auth-buttons a {
+      padding: 8px 16px;
+      margin-left: 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login {
+      color: #276ef1;
+      border: 1px solid #276ef1;
+    }
+
+    .register {
+      background: #f55a39;
+      color: white;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: linear-gradient(to bottom, #f4f7ff, #ffffff);
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
       color: #666;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .search-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .search-box input,
+    .search-box select {
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .search-box button {
+      background: #276ef1;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Hello from Sachin 👋</h1>
-  <p>This is my first GitHub Pages website!</p>
-</body>
-</html>
+
+  <header>
+    <div class="logo">jobbee</div>
+    <nav>
+      <a href="#">Jobs</a>
+      <a href="#">Companies</a>
+      <a href="#">Services</a>
+    </nav>
+    <div class="auth-buttons">
+      <a href="#" class="login">Login</a>
+      <a href="#" class="register">Register</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Find your dream job now</h1>
+    <p>5 lakh+ jobs for you to explore</p>
+
+    <div class="search-box">
+      <input type="text" placeholder="Enter skills / designations / companies">
+      <select>
+        <option>Select experience</option>
+        <option>Fresher</option>
+        <option>1-3 years</option>
+        <option>3
