@@ -1,132 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jobbee - Find Your Dream Job</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fc;
-      color: #333;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sachin — Building software for Indian businesses</title>
+<meta name="description" content="I'm Sachin. I build HireTrack, a job portal for India's SMEs, and Atllanta, a Business Operating System for hiring, people and CRM.">
+<meta property="og:title" content="Sachin — HireTrack &amp; Atllanta">
+<meta property="og:description" content="Two products for Indian businesses: HireTrack (job portal for SMEs) and Atllanta (Business OS for hiring, people & CRM).">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f8fc;
+    --surface: #ffffff;
+    --border: #e6e9f0;
+    --text: #10131a;
+    --muted: #5b6270;
+    --faint: #8b92a1;
+    --accent: #2563eb;
+    --accent-hover: #1d4fd8;
+    --accent-soft: #eef4ff;
+    --ht: #0e9f6e;        /* HireTrack green */
+    --ht-soft: #e7f8f0;
+    --at: #2563eb;        /* Atllanta blue */
+    --at-soft: #eef4ff;
+    --radius: 16px;
+    --shadow: 0 10px 30px -12px rgba(16,19,26,0.14);
+    --maxw: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d0f14; --bg-soft: #12151c; --surface: #151922; --border: #232936;
+      --text: #eef0f4; --muted: #a2a9b8; --faint: #6c7383;
+      --accent: #3b82f6; --accent-hover: #60a5fa; --accent-soft: #172033;
+      --ht: #34d399; --ht-soft: #10251d; --at: #3b82f6; --at-soft: #172033;
+      --shadow: 0 10px 30px -12px rgba(0,0,0,0.5);
     }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 46px; padding: 0 22px; border-radius: 10px; font-weight: 600; font-size: 15px;
+    border: 1px solid transparent; cursor: pointer; transition: all .15s ease;
+  }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+  .btn-ghost:hover { background: var(--bg-soft); }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
+  /* Nav */
+  nav.top {
+    position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(160%) blur(12px); border-bottom: 1px solid var(--border);
+  }
+  .top-inner { display: flex; align-items: center; height: 64px; gap: 20px; }
+  .name { font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
+  .name .dot { color: var(--accent); }
+  .top-links { margin-left: auto; display: flex; align-items: center; gap: 22px; }
+  .top-links a { color: var(--muted); font-weight: 500; font-size: 15px; }
+  .top-links a:hover { color: var(--text); }
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #276ef1;
-    }
+  /* Hero */
+  .hero { padding: 88px 0 64px; text-align: center; }
+  .hi { display: inline-block; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 6px 14px; border-radius: 999px; font-size: 14px; margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(2.1rem, 5.5vw, 3.6rem); line-height: 1.06; letter-spacing: -0.03em; font-weight: 800; margin: 0 auto 20px; max-width: 16ch; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .lede { font-size: clamp(1.05rem, 2.3vw, 1.3rem); color: var(--muted); max-width: 60ch; margin: 0 auto 34px; }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
+  /* Section */
+  section { padding: 72px 0; }
+  .sec-label { text-align: center; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); font-weight: 700; margin-bottom: 12px; }
+  .sec-title { text-align: center; font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 48px; }
 
-    .auth-buttons a {
-      padding: 8px 16px;
-      margin-left: 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  /* Product cards */
+  .products { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .product {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 36px; box-shadow: var(--shadow); display: flex; flex-direction: column;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .product:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -14px rgba(16,19,26,0.22); }
+  .product .badge { display: inline-flex; align-items: center; gap: 9px; font-weight: 800; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .product .mark { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px; }
+  .product.ht .mark { background: var(--ht); }
+  .product.at .mark { background: var(--at); }
+  .product .kicker { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+  .product.ht .kicker { color: var(--ht); }
+  .product.at .kicker { color: var(--at); }
+  .product p.blurb { color: var(--muted); font-size: 15.5px; margin: 0 0 22px; }
+  .feat { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 12px; }
+  .feat li { display: flex; gap: 10px; font-size: 15px; align-items: flex-start; }
+  .feat li svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+  .product.ht .feat li svg { color: var(--ht); }
+  .product.at .feat li svg { color: var(--at); }
+  .product .actions { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+  .product.ht .btn-primary { background: var(--ht); }
+  .product.ht .btn-primary:hover { filter: brightness(0.94); }
 
-    .login {
-      color: #276ef1;
-      border: 1px solid #276ef1;
-    }
+  /* About */
+  .about { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid { max-width: 760px; margin: 0 auto; text-align: center; }
+  .about-grid p { font-size: 18px; color: var(--muted); line-height: 1.65; }
+  .about-grid p strong { color: var(--text); font-weight: 600; }
 
-    .register {
-      background: #f55a39;
-      color: white;
-    }
+  /* Contact */
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 40px; text-align: center; box-shadow: var(--shadow); max-width: 640px; margin: 0 auto;
+  }
+  .contact-card h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .contact-card p { color: var(--muted); margin: 0 0 26px; }
+  .contact-rows { display: grid; gap: 12px; margin-bottom: 26px; }
+  .contact-row { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; font-weight: 500; }
+  .contact-row svg { width: 18px; height: 18px; color: var(--accent); }
+  .contact-row a:hover { color: var(--accent); }
 
-    .hero {
-      text-align: center;
-      padding: 100px 20px 60px;
-      background: linear-gradient(to bottom, #f4f7ff, #ffffff);
-    }
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--faint); font-size: 14px; }
+  .foot-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #666;
-      font-size: 18px;
-      margin-bottom: 40px;
-    }
-
-    .search-box {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .search-box input,
-    .search-box select {
-      padding: 12px 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .search-box button {
-      background: #276ef1;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 28px;
-      }
-    }
-  </style>
+  @media (max-width: 800px) {
+    .products { grid-template-columns: 1fr; }
+    .top-links a.hide-sm { display: none; }
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">jobbee</div>
-    <nav>
-      <a href="#">Jobs</a>
-      <a href="#">Companies</a>
-      <a href="#">Services</a>
-    </nav>
-    <div class="auth-buttons">
-      <a href="#" class="login">Login</a>
-      <a href="#" class="register">Register</a>
+<nav class="top">
+  <div class="wrap top-inner">
+    <span class="name">Sachin<span class="dot">.</span></span>
+    <div class="top-links">
+      <a class="hide-sm" href="#products">Products</a>
+      <a class="hide-sm" href="#about">About</a>
+      <a href="#contact">Contact</a>
     </div>
-  </header>
+  </div>
+</nav>
 
-  <section class="hero">
-    <h1>Find your dream job now</h1>
-    <p>5 lakh+ jobs for you to explore</p>
+<header class="wrap hero">
+  <span class="hi">👋 Hi, I'm Sachin</span>
+  <h1>I build software that <em>Indian businesses</em> actually use</h1>
+  <p class="lede">Two products, both made for how small and growing companies in India really work — from hiring your next employee to running your whole operation.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#products">See the products</a>
+    <a class="btn btn-ghost" href="#contact">Get in touch</a>
+  </div>
+</header>
 
-    <div class="search-box">
-      <input type="text" placeholder="Enter skills / designations / companies">
-      <select>
-        <option>Select experience</option>
-        <option>Fresher</option>
-        <option>1-3 years</option>
-        <option>3
+<section id="products">
+  <div class="wrap">
+    <div class="sec-label">What I've built</div>
+    <h2 class="sec-title">Two products, one mission</h2>
+    <div class="products">
+
+      <!-- HireTrack -->
+      <div class="product ht">
+        <div class="badge"><span class="mark">H</span> HireTrack</div>
+        <div class="kicker">Job portal for India's SMEs</div>
+        <p class="blurb">A hiring platform built for small and mid-sized businesses — post jobs for free, reach real candidates, and manage applications without an expensive ATS.</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Free job posting for employers</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Candidate &amp; employer dashboards</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Resume builder &amp; job alerts</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> WhatsApp-based apply flow</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://www.hiretrack.co.in" target="_blank" rel="noopener">
+            Visit HireTrack
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Atllanta -->
+      <div class="product at">
+        <div class="badge"><span class="mark">A</span> Atllanta</div>
+        <div class="kicker">Business Operating System</div>
+        <p class="blurb">One platform for hiring, people and customers — AI-assisted recruitment, attendance &amp; leave, and a CRM, unified with a single login. Installable, and works offline in the field.</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> AI CV–JD matching &amp; interviews</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Attendance, leave &amp; approvals</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> CRM &amp; sales pipeline</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Installable app that works offline</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://atllanta.vercel.app/landing" target="_blank" rel="noopener">
+            Explore Atllanta
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://atllanta.vercel.app/login" target="_blank" rel="noopener">Sign in</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="sec-label">About</div>
+    <h2 class="sec-title" style="margin-bottom:24px">Why I build</h2>
+    <p>Most software for small businesses is either too expensive, too complicated, or built for somewhere else. I build for <strong>Indian SMEs</strong> — rupees, IST, an April–March fiscal year, and the way teams here actually operate. <strong>HireTrack</strong> helps them hire; <strong>Atllanta</strong> helps them run everything after. Both are live, and built to be used from day one.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <h3>Let's talk</h3>
+      <p>Interested in HireTrack or Atllanta for your business? Reach out — I'd love to help.</p>
+      <div class="contact-rows">
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          <a href="mailto:anchansachinv99@gmail.com">anchansachinv99@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+918073163762">+91&nbsp;80731&nbsp;63762</a>
+        </div>
+      </div>
+      <a class="btn btn-primary" href="mailto:anchansachinv99@gmail.com?subject=Interested%20in%20your%20products">Send a message</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="name" style="font-size:15px">Sachin<span class="dot">.</span></span>
+    <span>© <span id="yr"></span> · HireTrack &amp; Atllanta</span>
+    <span><a href="https://github.com/marcilinous" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">GitHub</a></span>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
